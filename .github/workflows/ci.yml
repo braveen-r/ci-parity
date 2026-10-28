@@ -1,0 +1,20 @@
+name: CI Parity Test
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:16
+    env:
+      DATABASE_URL: "postgres://user:pass@localhost:5432/db"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.4"
